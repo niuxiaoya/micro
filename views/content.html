@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%-title%></title>
+</head>
+<body>
+<div id="box">
+    {{msg}}
+    <br>
+    <button @click="tz()">返回主页</button>
+</div>
+
+<script src="vue.js"></script>
+<script src="jquery-1.7.2.js"></script>
+<script>
+    console.log(window.location.search);
+    var vm=new Vue({
+        el:'#box',
+        data:{
+            msg:""
+        },
+        methods:{
+            tz:function(){
+                window.location.href="http://localhost:3000/detail.html";
+            }
+        }
+    });
+    vm.msg=decodeURI(window.location.search.substr(1));
+</script>
+</body>
+</html>
