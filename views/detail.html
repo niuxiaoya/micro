@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title><%- title%></title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="bootstrap.min.css">
     <style>
         .continer{
@@ -81,7 +83,7 @@
                 </h3>
             </div>
             <div class="pp" v-for="x in msg" @click="tz(x)">
-                <b>{{$index+1}}</b>
+                <b>{{$index+1}}.</b>
                 {{x.title}}
             </div>
         </div>
@@ -117,7 +119,6 @@
             },
             methods:{
                 tz:function(data){
-//                    alert("跳转"+data);
                     window.location.href="http://localhost:3000/content.html?"+data.content;
                 }
             }
@@ -128,7 +129,6 @@
                 type:"post",
                 success:function(msg){
                     if(msg.code==0){
-                        //alert("登陆成功")
                         console.log(msg);
                         vm.msg=msg.msg;
                     }
@@ -152,6 +152,7 @@
                         console.log(msg.msg);
                         aa();
                     }else{
+                        
                     }
 
                 }
