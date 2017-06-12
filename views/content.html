@@ -3,22 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title><%-title%></title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        #box{
+            margin: 20px auto;
+            width: 60%;
+        }
+        .btn{
+            float: right;
+        }
+        .title{
+            text-align: center;
+        }
+        .pp{
+            text-indent: 24px;
+        }
+    </style>
 </head>
 <body>
 <div id="box">
-    {{msg}}
+    <div v-for="x in msg">
+        <div v-if="ID==x.ID">
+            <h3 class="title">{{x.title}}</h3>
+            <p class="pp">{{x.content}}</p>
+        </div>
+    </div>
     <br>
-    <button @click="tz()">返回主页</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" > 点击量0 </button>
+    <br><button @click="tz()">返回主页</button>
+    <br>
 </div>
 
 <script src="vue.js"></script>
 <script src="jquery-1.7.2.js"></script>
 <script>
-    console.log(window.location.search);
     var vm=new Vue({
         el:'#box',
         data:{
-            msg:""
+            msg:"",
+            ID:''
         },
         methods:{
             tz:function(){
@@ -26,7 +49,23 @@
             }
         }
     });
-    vm.msg=decodeURI(window.location.search.substr(1));
+
+    function aa(){
+        $.ajax({
+            url:"/logined",
+            type:"post",
+            success:function(msg){
+                if(msg.code==0){
+                    console.log(msg);
+                    vm.msg=msg.msg;
+                }
+            }
+        });
+    }
+    aa();
+
+
+    vm.ID=decodeURI(window.location.search.substr(1));
 </script>
 </body>
 </html>
