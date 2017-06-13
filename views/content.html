@@ -29,7 +29,7 @@
         </div>
     </div>
     <br>
-    <button type="button" class="btn btn-primary" data-dismiss="modal" > 点击量0 </button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn"> 点击量0 </button>
     <br><button @click="tz()">返回主页</button>
     <br>
 </div>
@@ -66,6 +66,17 @@
 
 
     vm.ID=decodeURI(window.location.search.substr(1));
+    var ids=decodeURI(window.location.search.substr(1));
+
+    if (localStorage[ids]) {
+        console.log(ids);
+        localStorage[ids] = Number(localStorage[ids]) + 1;
+    } else {
+        localStorage[ids] = 1;
+    }
+    document.getElementById("btn").innerHTML = "点击量: " + localStorage[ids];
+
+    console.log(ids)
 </script>
 </body>
 </html>
